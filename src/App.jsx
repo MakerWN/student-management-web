@@ -9,7 +9,10 @@ import { Routes, Route, useNavigate, Link } from 'react-router-dom';
 
 import Home from './pages/home';
 import Students from './pages/students';
-import ClassRoom from './pages/classroom';
+import ClassRoom from './pages/classrooms';
+import AddAndEditStudent from './pages/create-update-student';
+import AddAndEditClassRoom from './pages/create-update-classroom';
+import AddStudentToClass from './pages/add-student-to-classroom';
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -25,7 +28,7 @@ const items = [
     label: `Students`,
   },
   {
-    key: `/classroom`,
+    key: `/classrooms`,
     icon: <TableOutlined />,
     label: `Classroom`,
   }
@@ -49,7 +52,6 @@ function App() {
             bottom: 0,
           }}
         >
-          <Link to="/" className="demo-logo-vertical">Home</Link>
           <Menu onClick={({ key }) => { navigate(key) }} theme="dark" mode="inline" defaultSelectedKeys={['/']}  items={items} />
         </Sider>
         <Layout
@@ -76,7 +78,13 @@ function App() {
               <Routes>
                 <Route path='/' element={<Home />}></Route>
                 <Route path='/students' element={<Students />}></Route>
-                <Route path='/classroom' element={<ClassRoom />}></Route>
+                <Route path='/classrooms' element={<ClassRoom />}></Route>
+                <Route path='/student' element={<AddAndEditStudent />}></Route>
+                <Route path='/student/:id' element={<AddAndEditStudent />}></Route>
+                <Route path='/class-room' element={<AddAndEditClassRoom />}></Route>
+                <Route path='/class-room/:id' element={<AddAndEditClassRoom />}></Route>
+                <Route path='/class-room/add-student' element={<AddStudentToClass />}></Route>
+                <Route path='/class-room/add-student/:id' element={<AddStudentToClass />}></Route>
               </Routes>
             </div>
           </Content>
