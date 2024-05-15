@@ -89,6 +89,20 @@ function Students() {
   const mapDataStudents = (students) => {
     const mapData = [];
     const options = { month: 'long', timeZone: 'Asia/Bangkok' };
+    const gradesData = [];
+    for (let i = 0; i < 6; i++) {
+      gradesData.push(
+        {
+          id: i,
+          name: `ป.${i + 1}`
+        }
+      )
+    }
+    const checkGrade = (e) => {
+      const grade = gradesData.find((g)=> g.id === Number(e));
+      return grade.name
+    }
+    
     students.forEach((e) => {
       mapData.push({
         key: e.id,
@@ -98,7 +112,7 @@ function Students() {
         lastName: e.lastName || null,
         gender: e.gender.name || null,
         dateOfBirth: new Date(e.dateOfBirth).toLocaleString('th-TH', options) || null,
-        grade: e.classRoom?.grade || null
+        grade: e?.classRoom?.grade ? checkGrade(e?.classRoom?.grade) : null
       })
     });
     return mapData;
@@ -128,7 +142,7 @@ function Students() {
       const grades = [];
       for (let i = 0; i < 6; i++) {
         grades.push(
-          <Option value={i}>{i + 1}</Option>
+          <Option value={i}>{`ป.${i + 1}`}</Option>
         )
       }
       return grades;
@@ -145,7 +159,7 @@ function Students() {
 
     const onFinish = (values) => {
       const search = values.searchText;
-      fetch(`http://localhost:8000/students?search=${search ? '?search='+search :'' }`)
+      fetch(`http://localhost:8000/students?search=${search ? '?search=' + search : ''}`)
         .then((res) => res.json())
         .then((d) => setData(mapDataStudents(d)))
         .catch(error => {

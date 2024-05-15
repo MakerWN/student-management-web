@@ -106,7 +106,7 @@ export default function AddStudentToClass() {
         prefix: e.prefix.name || null,
         firstName: e.firstName || null,
         lastName: e.lastName || null,
-        gender: e.gender.name || null,
+        gender: e.gender.id || null,
         dateOfBirth: new Date(e.dateOfBirth).toLocaleString('th-TH', options) || null,
         grade: e.classRoom?.grade || null
       })
